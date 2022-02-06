@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce6915f3695dc1442b347aebcd29c7bb, type: 3}
+  m_Name: Legplates
+  m_EditorClassIdentifier: 
+  name: Legplates of smradus kokotus
+  icon: {fileID: 21300000, guid: 7128ad47020b19343a305afe98ce7483, type: 3}
+  isDefaultItem: 0
+  equipmentSlot: 2
+  mesh: {fileID: 2902074850836285329, guid: 4747c6d80df6d8d4da17d6440d014eaa, type: 3}
+  coveredMeshRegions: 00000000
+  armorModifier: 4
+  damageModifier: 1

@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e9318d98ad1f3e34f92d2db07d5b0e9c, type: 3}
+  m_Name: StunAbility
+  m_EditorClassIdentifier: 
+  name: 
+  cooldownTime: 15
+  activeTime: 3
+  abilityImage: {fileID: 21300000, guid: f13b0852619ad5d4a89c90752c457368, type: 3}
+  rageCost: 30
+  stunTime: 3
+  damage: 41
+  cam: {fileID: 5232887700399604908, guid: 3b415dc3dda96284885c523cf1c2ee3e, type: 3}
+  projectile: {fileID: 3111316551468813770, guid: e687842618f946a4c807bdf4d65625a2,
+    type: 3}
+  fireRate: 4

@@ -1,0 +1,28 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class PlayerManager : MonoBehaviour
+{
+    #region Singleton
+
+    public static PlayerManager instance;
+
+    void Awake ()
+    {
+        Application.targetFrameRate = 30;
+        instance = this;
+        player = GameObject.Find("Player");
+    }
+
+    #endregion
+
+    public GameObject player;
+
+
+    public void KillPlayer ()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+    }
+}
