@@ -462,11 +462,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   died: 0
-  maxHealth: 100
+  maxHealth: 10
   damage:
     baseValue: 3
   armor:
     baseValue: 1
+  ID: 0
 --- !u!114 &3555584
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4978,11 +4979,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   died: 0
-  maxHealth: 100
+  maxHealth: 10
   damage:
     baseValue: 5
   armor:
     baseValue: 0
+  ID: 1
 --- !u!1001 &128962201
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14289,6 +14291,7 @@ Transform:
   - {fileID: 1830762453}
   - {fileID: 543450653124204028}
   - {fileID: 4927973182656997}
+  - {fileID: 738079128}
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26993,6 +26996,36 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 737471478}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &738079127
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 738079128}
+  m_Layer: 3
+  m_Name: Quests
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &738079128
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 738079127}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 376887330}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &738784874
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -62416,6 +62449,10 @@ MonoBehaviour:
   radius: 3
   interactionTransform: {fileID: 1461760949}
   inkJSON: {fileID: 4900000, guid: 9d929a9d532404e4dbe28e79219cdb32, type: 3}
+  quests: {fileID: 738079127}
+  questTypes:
+  - GraveyardProblem
+  - Supplies
 --- !u!1001 &1741762395
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -81011,7 +81048,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1672910859153313
 GameObject:
   m_ObjectHideFlags: 0
@@ -81855,7 +81892,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1965298654921922}
   m_LocalRotation: {x: -0.017937403, y: -0.0019196314, z: 0.013317396, w: 0.9997486}
-  m_LocalPosition: {x: -142.08029, y: 5.2, z: 323.71524}
+  m_LocalPosition: {x: -142.08029, y: 5.34, z: 323.71524}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4112599821922152}
@@ -107113,9 +107150,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   colorGradientTexture: {fileID: 0}
   shallowColor: {r: 0, g: 0.5566037, b: 0.44923854, a: 0.5019608}
-  deepColor: {r: 0, g: 0.2598132, b: 0.6509434, a: 1}
+  deepColor: {r: 0, g: 0.2598097, b: 0.6509434, a: 1}
   colorDepth: 1.63
-  horizonColor: {r: 0, g: 0.22718087, b: 0.8, a: 1}
+  horizonColor: {r: 0, g: 0.22717738, b: 0.8, a: 1}
   horizonDistance: 20
   shoreFade: 1
   shoreColor: {r: 1, g: 1, b: 1, a: 0}
@@ -107123,7 +107160,7 @@ MonoBehaviour:
   shoreBlend: 1
   shoreDepth: 0
   waveColor: {r: 0, g: 0, b: 0, a: 0}
-  underwaterColor: {r: 0.20366552, g: 0.30953375, b: 0.517647, a: 0}
+  underwaterColor: {r: 0.20366222, g: 0.30953026, b: 0.517647, a: 0}
   underwaterColorStrength: 0
   underwaterRefractionStrength: 0.15
   surfaceFoamTexture: {fileID: 2800000, guid: d3b0d77dfe711a04c8ff18ecc260aa66, type: 3}
@@ -107281,7 +107318,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &986080341668519457
 Transform:
   m_ObjectHideFlags: 0

@@ -20,16 +20,6 @@ public class CharacterStats : MonoBehaviour
         currentHealth = maxHealth;
     }
 
-    void Awake ()
-    {
-        
-    }
-
-    void Update()
-    {
-
-    }
-
     public void TakeDamage(int pDamage)
     {
         pDamage -= armor.GetValue();

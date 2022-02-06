@@ -50,4 +50,17 @@ public class DialogueVariables
             story.variablesState.SetGlobal(variable.Key, variable.Value);
         }
     }
+
+    public Ink.Runtime.Object QuestVariable()
+    {
+        foreach (KeyValuePair<string, Ink.Runtime.Object> variable in variables)
+        {
+            Debug.Log(variable);
+            if (variable.Key == "questVariable" && variable.Value != null)
+            {
+                return variable.Value;
+            }
+        }
+        return null;
+    }
 }

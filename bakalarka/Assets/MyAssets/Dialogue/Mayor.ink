@@ -17,6 +17,7 @@ INCLUDE Globals.ink
 === supply() ===
 Yes, the cargo should have been here yesterday. Can you find out what happened? They probably had some accident along the road...
     + [Yes, I will take care of that.]
+    ~ questVariable = "Supplies"
     -> thanks_dragon()
     + [No, I don't have time for that.]
     -> bye()
@@ -24,6 +25,7 @@ Yes, the cargo should have been here yesterday. Can you find out what happened? 
 === thanks_dragon ===
 Thank you. You will get your reward after the job is done.
     ~ suppliesVar = false
+    ~ questVariable = ""
 ->main
 
 === bye ===
@@ -33,6 +35,7 @@ Ok then, bye.
 === necromancer() ===
 Yes, some people are saying that there is something strange happening at the graveyard. Some of them even say that they have seen dead coming alive. Can you find out what is going on there?  
     + [Yes, I will take care of that.]
+    ~ questVariable = "GraveyardProblem"
     -> thanks_necromancer()
     + [No, I don't have time for this nonsense.]
     -> bye()
@@ -40,4 +43,5 @@ Yes, some people are saying that there is something strange happening at the gra
 === thanks_necromancer ===
 Thank you. You will get your reward after the job is done.
     ~ necromancerVar = false
+    ~ questVariable = ""
 ->main

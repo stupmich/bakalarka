@@ -48,6 +48,8 @@ public class DialogueManager : MonoBehaviour
 
     private DialogueVariables dialogueVariables;
 
+    public static event System.Action<string> OnQuestChoice;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -97,6 +99,14 @@ public class DialogueManager : MonoBehaviour
         {
             dialogueText.text = currentStory.Continue();
             DisplayChoices();
+
+            Ink.Runtime.Object value = dialogueVariables.QuestVariable();
+            Debug.Log("continue " + value);
+
+            if (OnQuestChoice != null && value != null)
+            {
+                OnQuestChoice(value.ToString());
+            }
         }
         else
         {
@@ -139,6 +149,14 @@ public class DialogueManager : MonoBehaviour
     public void MakeChoice(int index)
     {
         currentStory.ChooseChoiceIndex(index);
+        Ink.Runtime.Object value = dialogueVariables.QuestVariable();
+        Debug.Log(value);
+
+        if (OnQuestChoice != null && value != null)
+        {
+            OnQuestChoice(value.ToString());
+        }
+
         ContinueStory();
     }
 }

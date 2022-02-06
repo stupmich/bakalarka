@@ -7,6 +7,9 @@ public class EnemyStats : CharacterStats
     private LootTable lootTable;
     private GameObject player;
     private ExperienceManager expMan;
+    public int ID;
+
+    public static event System.Action<int> OnEnemyDeath;
 
     public override void Start()
     {
@@ -28,6 +31,11 @@ public class EnemyStats : CharacterStats
         if (expMan != null)
         {
             expMan.AddXP(100);
+        }
+
+        if (OnEnemyDeath != null)
+        {
+            OnEnemyDeath(ID);
         }
 
         StartCoroutine(waiter());
