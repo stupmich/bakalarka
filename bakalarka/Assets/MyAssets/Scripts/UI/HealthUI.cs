@@ -16,16 +16,25 @@ public class HealthUI : MonoBehaviour
     Image healthSlider;
     Transform cam;
 
+    public bool boss;
+
     // Start is called before the first frame update
     void Awake()
     {
         cam = Camera.main.transform;
+        Vector3 scaleChange = new Vector3(1, 1, 1);
 
         foreach (Canvas c in FindObjectsOfType<Canvas>())
         {
             if (c.renderMode == RenderMode.WorldSpace)
             {
-                ui = Instantiate(uiPrefab, c.transform).transform;
+
+                ui = Instantiate(uiPrefab, c.transform ).transform;
+                if (boss)
+                {
+                    ui.transform.localScale += scaleChange;
+                }
+               
                 healthSlider = ui.GetChild(0).GetComponent<Image>();
                 ui.gameObject.SetActive(false);
                 break;

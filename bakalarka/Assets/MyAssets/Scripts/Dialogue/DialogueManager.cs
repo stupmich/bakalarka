@@ -82,6 +82,7 @@ public class DialogueManager : MonoBehaviour
         dialogueVariables.StartListening(currentStory);
 
         ContinueStory();
+        Debug.Log("Dragon" + " " + currentStory.variablesState["Dragon"]);
     }
 
     private void ExitDialogueMode()
@@ -101,7 +102,6 @@ public class DialogueManager : MonoBehaviour
             DisplayChoices();
 
             Ink.Runtime.Object value = dialogueVariables.QuestVariable();
-            Debug.Log("continue " + value);
 
             if (OnQuestChoice != null && value != null)
             {
@@ -150,7 +150,6 @@ public class DialogueManager : MonoBehaviour
     {
         currentStory.ChooseChoiceIndex(index);
         Ink.Runtime.Object value = dialogueVariables.QuestVariable();
-        Debug.Log(value);
 
         if (OnQuestChoice != null && value != null)
         {
@@ -158,5 +157,16 @@ public class DialogueManager : MonoBehaviour
         }
 
         ContinueStory();
+    }
+
+    public DialogueVariables GetDialogueVariables()
+    {
+        return dialogueVariables;
+    }
+
+    public void SetDialogueBoolVariable(string key, bool value)
+    {
+        currentStory.variablesState[key] = value;
+        dialogueVariables.VariableChanged(key, currentStory.variablesState.GetVariableWithName(key));
     }
 }

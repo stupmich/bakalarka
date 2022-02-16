@@ -12,13 +12,23 @@ public class EnemyController : MonoBehaviour
     CharacterCombat enemyCombat;
     protected CharacterStats stats;
 
+    public Animation fightStartAnim;
+    public AnimationClip clip;
+    private int frames;
+    private bool cantMove = false;
+
     void Start()
     {
-
         target = PlayerManager.instance.player.transform;
         agent = GetComponent<NavMeshAgent>();
         enemyCombat = GetComponent<CharacterCombat>();
         stats = GetComponent<CharacterStats>();
+
+        if (clip != null)
+        {
+            frames = Mathf.CeilToInt(clip.frameRate * clip.length);
+            cantMove = true;
+        } 
     }
 
     // Update is called once per frame
@@ -30,18 +40,34 @@ public class EnemyController : MonoBehaviour
 
             if (distance <= lookRadius)
             {
-                agent.SetDestination(target.position);
+                enemyCombat.InCombat = true;
 
-                if (distance <= agent.stoppingDistance)
+                if (cantMove)
                 {
-                    CharacterStats targetStats = target.GetComponent<CharacterStats>();
-
-                    if (targetStats != null)
+                    if (frames > 0)
                     {
+                        frames--;
+                    } else if (frames == 0)
+                    {
+                        frames = -1;
+                        this.cantMove = false;
+                    } 
+                }
+                else
+                {
+                    agent.SetDestination(target.position);
 
-                        enemyCombat.Attack(targetStats);
+                    if (distance <= agent.stoppingDistance)
+                    {
+                        CharacterStats targetStats = target.GetComponent<CharacterStats>();
+
+                        if (targetStats != null)
+                        {
+
+                            enemyCombat.Attack(targetStats);
+                        }
+                        FaceTarget();
                     }
-                    FaceTarget();
                 }
             }
         }
@@ -59,5 +85,15 @@ public class EnemyController : MonoBehaviour
     {
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, lookRadius);
+    }
+
+    IEnumerator Waiter(float time)
+    {
+        yield return new WaitForSecondsRealtime(time);
+    }
+
+    public void SetCantMove(bool pCantMove)
+    {
+        this.cantMove = pCantMove;
     }
 }

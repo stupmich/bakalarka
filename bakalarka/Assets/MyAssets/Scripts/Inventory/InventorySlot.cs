@@ -123,6 +123,9 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 tempTextBox.text = "Block chance: " + equip.blockChanceModifier.ToString();
             }
 
+        } else if (item != null && item.GetType().ToString() == "QuestItem") 
+        {
+
         }
     }
 

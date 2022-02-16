@@ -10,8 +10,9 @@ public class CharacterAnimator : MonoBehaviour
     protected AnimationClip[] currentAttackAnimationSet;
 
     protected Animator animator;
-    NavMeshAgent agent;
+    protected NavMeshAgent agent;
     protected CharacterCombat combat;
+    protected CharacterStats stats;
     public AnimatorOverrideController overrideController;
 
     // Start is called before the first frame update
@@ -20,6 +21,7 @@ public class CharacterAnimator : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponentInChildren<Animator>();
         combat = GetComponent<CharacterCombat>();
+        stats = GetComponent<CharacterStats>();
 
         if (overrideController == null)
         {
@@ -30,22 +32,33 @@ public class CharacterAnimator : MonoBehaviour
 
         currentAttackAnimationSet = defaultAttackAnimationSet;
         combat.OnAttack += OnAttack;
+
+        stats.OnDeath += OnDeath;
     }
 
     // Update is called once per frame
     protected virtual void Update()
     {
-        float speedPercent = agent.velocity.magnitude / agent.speed;
-        animator.SetFloat("SpeedPercent", speedPercent, .1f, Time.deltaTime);
-        animator.SetBool("InCombat", combat.InCombat);
+        if (stats.died == false)
+        {
+            float speedPercent = agent.velocity.magnitude / agent.speed;
+            animator.SetFloat("SpeedPercent", speedPercent, .1f, Time.deltaTime);
+            animator.SetBool("InCombat", combat.InCombat);
+        }
     }
 
     protected virtual void OnAttack()
     {
-        animator.SetTrigger("Attack");
-        int attackIndex = Random.Range(0, currentAttackAnimationSet.Length);
-        overrideController[replaceableAttackAnimation.name] = currentAttackAnimationSet[attackIndex];
+        if (stats.died == false)
+        {
+            animator.SetTrigger("Attack");
+            int attackIndex = Random.Range(0, currentAttackAnimationSet.Length);
+            overrideController[replaceableAttackAnimation.name] = currentAttackAnimationSet[attackIndex];
+        }
     }
 
-
+    protected virtual void OnDeath()
+    {
+        animator.SetTrigger("Death");
+    }
 }

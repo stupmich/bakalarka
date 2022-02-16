@@ -18,40 +18,55 @@ public class Villager : Interactable
 
     public void Start()
     {
-        DialogueManager.OnQuestChoice += Quest;
-
+        DialogueManager.OnQuestChoice += TalkAboutQuest;
     }
 
     public override void interact()
     {
         base.interact();
+
+        Quest[] assignedQuests = quests.GetComponents<Quest>();
+        foreach (string type in questTypes)
+        {
+            for (int i = 0; i < assignedQuests.Length; i++)
+            {
+                if (assignedQuests[i].completed == true)
+                {
+                    DialogueManager.GetInstance().SetDialogueBoolVariable(assignedQuests[i].questName, true);
+                }
+            }
+        }
+
         DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
-
-
     }
 
-    public void Quest(string pQuestType)
+    public void TalkAboutQuest(string pQuestType)
     {
+        Quest[] assignedQuests = quests.GetComponents<Quest>();
+
+        for (int i = 0; i < assignedQuests.Length; i++)
+        {
+            if (assignedQuests[i].questName == pQuestType)
+            {
+                if (CheckQuestCompletion(assignedQuests[i]))
+                {
+                    Object.Destroy(assignedQuests[i]);
+                    DialogueManager.GetInstance().SetDialogueBoolVariable(assignedQuests[i].questName, false);
+                }
+                return;
+            }
+        }
+
         foreach (string type in questTypes)
         {
             if (type == pQuestType)
             {
-                Debug.Log(type);
+                Debug.Log("assign " + type);
                 AssignQuest(type);
-                //if (!assignedQuest && !Helped)
-                //{
-                //    AssignQuest();
-                //}
-                //else if (assignedQuest && !Helped)
-                //{
-                //    CheckQuestCompletion();
-                //}
-                //else
-                //{
-                //    //dialog dik bye
-                //}
+                return;
             }
         }
+ 
     }
 
     void AssignQuest(string pQuestType)
@@ -61,17 +76,16 @@ public class Villager : Interactable
 
     }
 
-    void CheckQuestCompletion()
+    bool CheckQuestCompletion(Quest pQuest)
     {
-        if (quest.completed)
+        if (pQuest.completed)
         {
-            quest.GiveReward();
-            Helped = true;
-            assignedQuest = false;
-            // novy dialog
+            pQuest.GiveReward();
+            questTypes.Remove(pQuest.questName);
+            return true;
         } else
         {
-            //dialog nespravil si quest
+            return false;
         }
     }
 
