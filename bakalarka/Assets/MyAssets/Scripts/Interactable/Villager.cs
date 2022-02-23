@@ -80,6 +80,17 @@ public class Villager : Interactable
     {
         if (pQuest.completed)
         {
+            foreach (Goal goal in pQuest.goals)
+            {
+                if (goal.GetType().ToString() == "CollectionGoal")
+                {
+                    CollectionGoal collGoal = (CollectionGoal)goal;
+                    foreach (QuestItem qi in collGoal.GetPickedItems())
+                    {
+                        qi.TurnQuestIn();
+                    }
+                }
+            }
             pQuest.GiveReward();
             questTypes.Remove(pQuest.questName);
             return true;

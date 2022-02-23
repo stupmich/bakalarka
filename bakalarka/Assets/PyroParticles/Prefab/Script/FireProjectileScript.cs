@@ -68,7 +68,6 @@ namespace DigitalRuby.PyroParticles
 
         public void HandleCollision(GameObject obj, Collision c)
         {
-            Debug.Log("collision0");
             if (collided)
             {
                 // already collided, don't do anything

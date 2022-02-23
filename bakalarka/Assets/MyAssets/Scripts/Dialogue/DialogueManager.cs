@@ -82,7 +82,6 @@ public class DialogueManager : MonoBehaviour
         dialogueVariables.StartListening(currentStory);
 
         ContinueStory();
-        Debug.Log("Dragon" + " " + currentStory.variablesState["Dragon"]);
     }
 
     private void ExitDialogueMode()
