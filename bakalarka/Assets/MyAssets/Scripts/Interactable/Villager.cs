@@ -7,14 +7,13 @@ public class Villager : Interactable
     [Header("Ink JSON")]
     [SerializeField] private TextAsset inkJSON;
 
-    public bool assignedQuest { get; set; }
-    public bool Helped { get; set; }
-
     [SerializeField]
-    private GameObject quests;
+    private GameObject playerQuests;
     [SerializeField]
     private List<string> questTypes;
     private Quest quest { get; set; }
+
+    public static event System.Action<Quest> OnQuestAssigned;
 
     public void Start()
     {
@@ -25,7 +24,7 @@ public class Villager : Interactable
     {
         base.interact();
 
-        Quest[] assignedQuests = quests.GetComponents<Quest>();
+        Quest[] assignedQuests = playerQuests.GetComponents<Quest>();
         foreach (string type in questTypes)
         {
             for (int i = 0; i < assignedQuests.Length; i++)
@@ -42,7 +41,7 @@ public class Villager : Interactable
 
     public void TalkAboutQuest(string pQuestType)
     {
-        Quest[] assignedQuests = quests.GetComponents<Quest>();
+        Quest[] assignedQuests = playerQuests.GetComponents<Quest>();
 
         for (int i = 0; i < assignedQuests.Length; i++)
         {
@@ -61,7 +60,6 @@ public class Villager : Interactable
         {
             if (type == pQuestType)
             {
-                Debug.Log("assign " + type);
                 AssignQuest(type);
                 return;
             }
@@ -71,9 +69,10 @@ public class Villager : Interactable
 
     void AssignQuest(string pQuestType)
     {
-        assignedQuest = true;
-        quest = (Quest)quests.AddComponent(System.Type.GetType(pQuestType));
+        quest = (Quest)playerQuests.AddComponent(System.Type.GetType(pQuestType));
 
+        if (OnQuestAssigned != null)
+            OnQuestAssigned(quest);
     }
 
     bool CheckQuestCompletion(Quest pQuest)

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Dragon : Quest
 {
-    void Start()
+    public Dragon()
     {
         this.questName = "Dragon";
         this.description = "Kill the beast and bring me his head.";

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Supplies : Quest
 {
-    void Start()
+    public Supplies()
     {
         this.questName = "Supplies";
         this.description = "Find out what happened with the wagon.";
@@ -13,6 +13,5 @@ public class Supplies : Quest
         goals.Add(new ExploreGoal(this, "Wagon", "Find wagon with supplies.", false, 0, 1));
 
         goals.ForEach(goal => goal.Init());
-
     }
 }
