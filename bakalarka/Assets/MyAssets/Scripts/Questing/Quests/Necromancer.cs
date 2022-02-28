@@ -5,7 +5,7 @@ using UnityEngine;
 public class Necromancer : Quest
 {
     // Start is called before the first frame update
-    public Necromancer()
+    public void Awake()
     {
         this.questName = "Necromancer";
         this.description = "Kill the necromancer and the skeletons he made alive.";

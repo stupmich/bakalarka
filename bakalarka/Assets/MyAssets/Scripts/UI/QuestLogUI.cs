@@ -7,12 +7,16 @@ using UnityEngine.UI;
 public class QuestLogUI : MonoBehaviour
 {
     [SerializeField]
-    private GameObject panel;
+    private GameObject questLogUI;
+    [SerializeField]
+    private GameObject content;
     [SerializeField]
     private GameObject questPrefab;
 
     [SerializeField]
     private GameObject questDescription;
+    [SerializeField]
+    private GameObject noQuestsActive;
 
     private List<Quest> quests = new List<Quest>();
 
@@ -30,15 +34,61 @@ public class QuestLogUI : MonoBehaviour
     void Start()
     {
         Villager.OnQuestAssigned += OnQuestAssigned;
+        Villager.OnQuestTurnedIn += OnQuestTurnedIn;
+
+        noQuestsActive.SetActive(true);
+    }
+
+    void Update()
+    {
+        if (Input.GetButtonDown("QuestLog"))
+        {
+            questLogUI.SetActive(!questLogUI.activeSelf);
+            if (questDescription.activeSelf)
+            {
+                questDescription.SetActive(false);
+            }
+        }
     }
 
     public void OnQuestAssigned(Quest pQuest)
     {
-        GameObject questName = GameObject.Instantiate(questPrefab, new Vector3(0,0,0), Quaternion.identity, panel.transform) as GameObject;
+        GameObject questName = GameObject.Instantiate(questPrefab, new Vector3(0,0,0), Quaternion.identity, content.transform) as GameObject;
         questName.GetComponent<Text>().text = pQuest.questName;
 
         questName.GetComponentInChildren<Button>().onClick.AddListener(() => ClickOnQuest(questName.GetComponent<Text>().text));
         quests.Add(pQuest);
+
+        if (quests.Count != 0)
+        {
+            noQuestsActive.SetActive(false);
+        }
+    }
+
+    public void OnQuestTurnedIn(Quest pQuest)
+    {
+        foreach (Quest quest in quests)
+        {
+            if (quest.questName == pQuest.questName)
+            {
+                foreach (Text questText in content.GetComponentsInChildren<Text>())
+                {
+                    if (quest.questName == questText.text)
+                    {
+                        Debug.Log(quest.questName + " " + questText.text);
+                        Object.Destroy(questText.gameObject);
+                        break;
+                    }
+                }
+                quests.Remove(quest);
+                break;
+            }
+        }
+
+        if (quests.Count == 0)
+        {
+            noQuestsActive.SetActive(true);
+        }
     }
 
     public void ClickOnQuest(string pQuestName)
@@ -52,13 +102,13 @@ public class QuestLogUI : MonoBehaviour
                 questDescription.SetActive(true);
                 if (quest.completed)
                 {
-                    questNameText.text = quest.name + "(Completed)";
+                    questNameText.text = quest.questName + "(Completed)";
                 }
                 else
                 {
-                    questNameText.text = quest.name;
+                    questNameText.text = quest.questName;
                 }
-
+                
                 questDescriptionText.text = quest.description;
                 foreach (Goal goal in quest.goals)
                 {

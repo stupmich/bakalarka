@@ -14,6 +14,7 @@ public class Villager : Interactable
     private Quest quest { get; set; }
 
     public static event System.Action<Quest> OnQuestAssigned;
+    public static event System.Action<Quest> OnQuestTurnedIn;
 
     public void Start()
     {
@@ -49,6 +50,8 @@ public class Villager : Interactable
             {
                 if (CheckQuestCompletion(assignedQuests[i]))
                 {
+                    if (OnQuestTurnedIn != null)
+                        OnQuestTurnedIn(assignedQuests[i]);
                     Object.Destroy(assignedQuests[i]);
                     DialogueManager.GetInstance().SetDialogueBoolVariable(assignedQuests[i].questName, false);
                 }

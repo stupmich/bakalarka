@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 6299453240265438234}
   - component: {fileID: 6299453240265438693}
   m_Layer: 0
-  m_Name: Helmet
+  m_Name: SteelHelmetPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

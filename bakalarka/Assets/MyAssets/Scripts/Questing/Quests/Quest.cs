@@ -10,7 +10,7 @@ public class Quest : MonoBehaviour
     public string questName;
     public string description;
     public int experienceReward;
-    public Item itemReward;
+    public Equipment itemReward;
     public bool completed;
 
     public void CheckGoalsCompletion()
