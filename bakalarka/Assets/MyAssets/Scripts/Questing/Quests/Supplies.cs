@@ -8,8 +8,8 @@ public class Supplies : Quest
     {
         this.questName = "Supplies";
         this.description = "Find out what happened with the wagon.";
-        this.experienceReward = 150;
-        this.itemReward = (Equipment)Resources.Load("SteelHelmetEquipment");
+        this.experienceReward = 150; 
+        this.itemReward = (Equipment)Resources.Load("Items/SteelShieldEquipment");
 
         goals.Add(new ExploreGoal(this, "Wagon", "Find wagon with supplies.", false, 0, 1));
 

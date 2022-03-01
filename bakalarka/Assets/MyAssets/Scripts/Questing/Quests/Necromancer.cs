@@ -10,6 +10,7 @@ public class Necromancer : Quest
         this.questName = "Necromancer";
         this.description = "Kill the necromancer and the skeletons he made alive.";
         this.experienceReward = 150;
+        this.itemReward = (Equipment)Resources.Load("Items/SteelLegplatesEquipment");
 
         goals.Add(new KillGoal(this,0, "Kill 3 skeletons", false, 0, 1));
         goals.Add(new KillGoal(this,1, "Kill necromancer", false, 0, 1));

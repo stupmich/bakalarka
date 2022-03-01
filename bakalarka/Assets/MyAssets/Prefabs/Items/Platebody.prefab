@@ -11,6 +11,8 @@ GameObject:
   - component: {fileID: 9220195407012051289}
   - component: {fileID: 6931342958321190980}
   - component: {fileID: 8562904696045717270}
+  - component: {fileID: 4750462063045087573}
+  - component: {fileID: 3518584513439931358}
   m_Layer: 0
   m_Name: Platebody
   m_TagString: Untagged
@@ -84,3 +86,32 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7614684848637725107}
   m_Mesh: {fileID: 6640332948465887969, guid: 51036f6c97d990740858a382badb898c, type: 3}
+--- !u!114 &4750462063045087573
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614684848637725107}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eed9456eae7ff249877899f1f3125cc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 3
+  interactionTransform: {fileID: 9220195407012051289}
+  item: {fileID: 11400000, guid: 8079dfa6549799a49af3441b422211d9, type: 2}
+--- !u!136 &3518584513439931358
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7614684848637725107}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.0037664855
+  m_Height: 0.0029241797
+  m_Direction: 1
+  m_Center: {x: -3.4924597e-10, y: 0.000013685317, z: -0.00012815799}

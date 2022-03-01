@@ -1,50 +1,20 @@
-﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
 
-public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
+public class ItemRewardUI : MonoBehaviour, IPointerEnterHandler, IPointerExitHandler
 {
-    Item item;
-    public Image icon;
-    public Button removeButton;
-
-    public GameObject equipInfoPrefab;
-    public GameObject itemInfo;
-
-    public Text textPrefab;
+    [SerializeField]
+    private Item item;
+    [SerializeField]
+    private GameObject equipInfoPrefab;
+    [SerializeField]
+    private GameObject itemInfo;
+    [SerializeField]
+    private Text textPrefab;
     private Text[] texts;
-
-
-    public void AddItem(Item newItem)
-    {
-        item = newItem;
-        icon.sprite = item.icon;
-        icon.enabled = true;
-        
-        removeButton.interactable = true;
-    }
-
-    public void ClearSlot()
-    {
-        item = null;
-        icon.sprite = null;
-        icon.enabled = false;
-
-        removeButton.interactable = false;
-    }
-
-    public void OnRemoveButton ()
-    {
-        Inventory.instance.Remove(item);
-    }
-
-    public void UseItem ()
-    {
-        if(item != null)
-        {
-            item.Use();
-        }
-    }
 
     public void OnPointerEnter(PointerEventData eventData)
     {
@@ -113,16 +83,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Block chance: " + equip.blockChanceModifier.ToString();
             }
-
-        } else if (item != null && item.GetType().ToString() == "QuestItem") 
-        {
-            itemInfo = GameObject.Instantiate(equipInfoPrefab, Input.mousePosition, Quaternion.identity, GameObject.FindGameObjectWithTag("CanvasUI").transform);
-            texts = itemInfo.GetComponentsInChildren<Text>();
-
-            InventoryUI.instace.itemInfo = this.itemInfo;
-
-            texts[0].text = item.name;
-            texts[1].text = "Quest Item";
         }
     }
 
@@ -133,5 +93,15 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
         {
             Destroy(itemInfo);
         }
+    }
+
+    public void SetItem(Item pItem)
+    {
+        this.item = pItem;
+    }
+
+    public GameObject GetItemInfo()
+    {
+        return this.itemInfo;
     }
 }

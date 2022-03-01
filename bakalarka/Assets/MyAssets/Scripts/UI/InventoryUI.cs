@@ -31,6 +31,7 @@ public class InventoryUI : MonoBehaviour
     public Text damageText;
     public Text goldText;
 
+    public GameObject itemInfo;
 
     void Start()
     {
@@ -58,6 +59,10 @@ public class InventoryUI : MonoBehaviour
     {
         if (Input.GetButtonDown("Inventory"))
         {
+            if (this.inventoryUI.activeSelf == true && this.itemInfo != null)
+            {
+                Object.Destroy(this.itemInfo);
+            }
             inventoryUI.SetActive(!inventoryUI.activeSelf);
         }
     }

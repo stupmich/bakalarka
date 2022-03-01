@@ -29,7 +29,7 @@ public class QuestLogUI : MonoBehaviour
     [SerializeField]
     private Text questXPText;
     [SerializeField]
-    private Text questGoldText;
+    private GameObject itemReward;
 
     void Start()
     {
@@ -47,6 +47,10 @@ public class QuestLogUI : MonoBehaviour
             if (questDescription.activeSelf)
             {
                 questDescription.SetActive(false);
+                if (itemReward.GetComponent<ItemRewardUI>().GetItemInfo() != null)
+                {
+                    Object.Destroy(itemReward.GetComponent<ItemRewardUI>().GetItemInfo());
+                }
             }
         }
     }
@@ -113,10 +117,19 @@ public class QuestLogUI : MonoBehaviour
                 foreach (Goal goal in quest.goals)
                 {
                     questGoalsText.text += goal.description + " " + goal.currentAmount + "/" + goal.requiredAmount + "\n";
-                    Debug.Log(goal.description);
                 }
                 questXPText.text = "XP: " + quest.experienceReward.ToString();
 
+                if (quest.itemReward != null)
+                {
+                    this.itemReward.GetComponent<ItemRewardUI>().SetItem(quest.itemReward);
+                    this.itemReward.SetActive(true);
+                    this.itemReward.GetComponent<Image>().sprite = quest.itemReward.icon;
+                } else
+                {
+                    this.itemReward.SetActive(false);
+                    this.itemReward.GetComponent<Image>().sprite = null;
+                }
             }
         }
     }

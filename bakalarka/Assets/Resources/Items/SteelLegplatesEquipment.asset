@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce6915f3695dc1442b347aebcd29c7bb, type: 3}
-  m_Name: Legplates
+  m_Name: SteelLegplatesEquipment
   m_EditorClassIdentifier: 
-  name: Legplates of smradus kokotus
+  name: Steel Legplates
   icon: {fileID: 21300000, guid: 7128ad47020b19343a305afe98ce7483, type: 3}
   isDefaultItem: 0
   equipmentSlot: 2
   mesh: {fileID: 2902074850836285329, guid: 4747c6d80df6d8d4da17d6440d014eaa, type: 3}
   coveredMeshRegions: 00000000
   armorModifier: 4
+  vitalityModifier: 0
+  strengthModifier: 0
+  dexterityModifier: 0
+  blockChanceModifier: 0
   damageModifier: 1

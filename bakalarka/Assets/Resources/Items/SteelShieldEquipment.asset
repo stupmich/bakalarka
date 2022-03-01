@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce6915f3695dc1442b347aebcd29c7bb, type: 3}
-  m_Name: Shield
+  m_Name: SteelShieldEquipment
   m_EditorClassIdentifier: 
-  name: Shield
+  name: Steel Shield
   icon: {fileID: 21300000, guid: f7f9df7f692caa94f8969134ecd0086e, type: 3}
   isDefaultItem: 0
   equipmentSlot: 4
   mesh: {fileID: 8727321259843962254, guid: 18ca8cf7a3817dd489525cc0989adc7e, type: 3}
   coveredMeshRegions: 
   armorModifier: 3
+  vitalityModifier: 0
+  strengthModifier: 0
+  dexterityModifier: 0
+  blockChanceModifier: 0
   damageModifier: 0

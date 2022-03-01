@@ -10,13 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce6915f3695dc1442b347aebcd29c7bb, type: 3}
-  m_Name: Chest piece
+  m_Name: SteelChestArmorEquipment
   m_EditorClassIdentifier: 
-  name: Chest priece
+  name: Steel Chest Armor
   icon: {fileID: 21300000, guid: d2e7360d2d018444e969f7641af9d40c, type: 3}
   isDefaultItem: 0
   equipmentSlot: 1
   mesh: {fileID: 3602657039539497127, guid: b527b33c9072c4a41b018b7316434964, type: 3}
   coveredMeshRegions: 0100000002000000
   armorModifier: 10
+  vitalityModifier: 0
+  strengthModifier: 0
+  dexterityModifier: 0
+  blockChanceModifier: 0
   damageModifier: 2

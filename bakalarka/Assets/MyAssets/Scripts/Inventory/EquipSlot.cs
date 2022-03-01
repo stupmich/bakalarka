@@ -30,7 +30,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         removeButton.interactable = true;
     }
 
-
     public void OnRemoveButton()
     {
         Inventory.instance.RemoveEquipFromSlot(item);
@@ -49,8 +48,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
         }
     }
 
-
-
     public void OnPointerEnter(PointerEventData eventData)
     {
         if (item != null && equipInfoPrefab != null && equipInfo == null)
@@ -67,8 +64,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
                 tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
-                //Set the text box's text element font size and style:
-                tempTextBox.fontSize = 10;
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Damage: " + item.damageModifier.ToString();
             }
@@ -78,8 +73,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
                 tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
-                //Set the text box's text element font size and style:
-                tempTextBox.fontSize = 10;
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Armor: " + item.armorModifier.ToString();
             }
@@ -89,8 +82,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
                 tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
-                //Set the text box's text element font size and style:
-                tempTextBox.fontSize = 10;
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Vitality: " + item.vitalityModifier.ToString();
             }
@@ -100,8 +91,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
                 tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
-                //Set the text box's text element font size and style:
-                tempTextBox.fontSize = 10;
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Strength: " + item.strengthModifier.ToString();
             }
@@ -111,8 +100,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
                 tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
-                //Set the text box's text element font size and style:
-                tempTextBox.fontSize = 10;
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Dexterity: " + item.dexterityModifier.ToString();
             }
@@ -122,8 +109,6 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
                 tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
-                //Set the text box's text element font size and style:
-                tempTextBox.fontSize = 10;
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Block chance: " + item.blockChanceModifier.ToString();
             }
