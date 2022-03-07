@@ -6,25 +6,35 @@ using UnityEngine.SceneManagement;
 
 public class Entrance : Interactable
 {
+    [SerializeField]
+    private StateManager stateManager;
+
     public int indexOfScene;
     // Type in the name of the Scene you would like to load in the Inspector
     public string m_Scene;
 
+    //public void Awake()
+    //{
+    //    stateManager = StateManager.instance;
+    //}
+
     public override void interact()
     {
         base.interact();
-
-        StartCoroutine(Enter()); 
+        stateManager.SaveEnemiesState();
+        StartCoroutine(Enter());
+        
     }
 
 
     IEnumerator Enter()
     {
+        
         // Set the current Scene to be able to unload it later
         Scene currentScene = SceneManager.GetActiveScene();
 
         // The Application loads the Scene in the background at the same time as the current Scene.
-        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(m_Scene, LoadSceneMode.Additive);
+        AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(m_Scene, LoadSceneMode.Single);
 
         // Wait until the last operation fully loads to return anything
         while (!asyncLoad.isDone)
@@ -34,5 +44,6 @@ public class Entrance : Interactable
 
         // Unload the previous Scene
         SceneManager.UnloadSceneAsync(currentScene);
+        stateManager.LoadEnemiesState();
     }
 }

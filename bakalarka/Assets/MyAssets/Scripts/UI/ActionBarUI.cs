@@ -5,7 +5,9 @@ using UnityEngine.UI;
 
 public class ActionBarUI : MonoBehaviour
 {
+    [SerializeField]
     private PlayerAbilities abilities;
+    [SerializeField]
     private PlayerStats stats;
 
     public Image ability1;
@@ -22,12 +24,8 @@ public class ActionBarUI : MonoBehaviour
 
     public Image health;
     public Image rage;
-
     private void Awake()
     {
-        abilities = PlayerAbilities.instance;
-        stats = PlayerStats.instance;
-
         stats.OnRageChanged += UpdateRageUI;
         stats.OnHealthChanged += UpdateHealthUI;
 
@@ -102,7 +100,10 @@ public class ActionBarUI : MonoBehaviour
 
     void UpdateRageUI(float ragePerc)
     {
-        rage.fillAmount = ragePerc;
+        if (rage != null)
+        {
+            rage.fillAmount = ragePerc;
+        } 
     }
 
     void UpdateHealthUI(float healthPerc)

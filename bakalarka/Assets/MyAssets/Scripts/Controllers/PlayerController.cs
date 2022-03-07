@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     PlayerMotor motor;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         DontDestroyOnLoad(gameObject);
 

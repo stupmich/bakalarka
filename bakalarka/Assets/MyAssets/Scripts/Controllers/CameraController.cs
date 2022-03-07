@@ -14,7 +14,7 @@ public class CameraController : MonoBehaviour
 
     public GameObject player;
 
-    void Start()
+    void Awake()
     {
         //DontDestroyOnLoad(gameObject);
         player = GameObject.Find("Player");

@@ -9,11 +9,11 @@ public class InventoryUI : MonoBehaviour
     void Awake()
     {
         instace = this;
-        xpManager = ExperienceManager.instance;
         xpManager.OnXPChanged += OnXPChanged;
     }
     #endregion
 
+    [SerializeField]
     ExperienceManager xpManager;
     Inventory inventory;
     PlayerStats playerStats;

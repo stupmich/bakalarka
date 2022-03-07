@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class CharacterStats : MonoBehaviour
 {
-    public bool died = false;
+    public bool died;
 
     public int maxHealth = 100;
     public int currentHealth { get; private set; } //kazda trieda moze get, set iba tato

@@ -10,7 +10,7 @@ public class DialogueVariables
 
     public DialogueVariables(string globalsFilePath)
     {
-        Debug.Log(globalsFilePath);
+        //Debug.Log(globalsFilePath);
         string inkFileContents = File.ReadAllText(globalsFilePath);
         Ink.Compiler compiler = new Ink.Compiler(inkFileContents);
         Story globalVariablesStory = compiler.Compile();
@@ -63,19 +63,6 @@ public class DialogueVariables
         }
         return null;
     }
-
-    //public Ink.Runtime.Object SetVariable(string key)
-    //{
-    //    foreach (KeyValuePair<string, Ink.Runtime.Object> variable in variables)
-    //    {
-    //        Debug.Log(variable);
-    //        if (variable.Key == key)
-    //        {
-    //            return variable.Value;
-    //        }
-    //    }
-    //    return null;
-    //}
 
     public void SetVariable(Story story, string key, Ink.Runtime.Object value )
     {

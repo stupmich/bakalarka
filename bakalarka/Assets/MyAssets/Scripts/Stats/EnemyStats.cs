@@ -10,13 +10,20 @@ public class EnemyStats : CharacterStats
     public int ID;
 
     public static event System.Action<int> OnEnemyDeath;
+    public static event System.Action<GameObject> ChangedState;
 
     public override void Start()
     {
-        base.Start();
-        player = GameObject.FindWithTag("Player");
-        expMan = player.GetComponent<ExperienceManager>();
-        lootTable = GetComponent<LootTable>();
+        if (this.died)
+        {
+            Object.Destroy(this.gameObject);
+        } else
+        {
+            base.Start();
+            player = GameObject.FindWithTag("Player");
+            expMan = player.GetComponent<ExperienceManager>();
+            lootTable = GetComponent<LootTable>();
+        }
     }
 
     public override void Die()
@@ -38,14 +45,18 @@ public class EnemyStats : CharacterStats
             OnEnemyDeath(ID);
         }
 
+        if (ChangedState != null)
+        {
+            ChangedState(this.gameObject);
+        }
+
         StartCoroutine(waiter());
-        //efekt, loot
         
     }
 
     IEnumerator waiter()
     {
-        yield return new WaitForSecondsRealtime(3);
-        Destroy(gameObject);
+        yield return new WaitForSecondsRealtime(4);
+        this.gameObject.SetActive(false);
     }
 }

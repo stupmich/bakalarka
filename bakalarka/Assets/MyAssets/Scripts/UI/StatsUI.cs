@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class StatsUI : MonoBehaviour
 {
+    [SerializeField]
     ExperienceManager xpManager;
     PlayerStats playerStats;
     Inventory inventory;
@@ -23,7 +24,6 @@ public class StatsUI : MonoBehaviour
 
     void Awake()
     {
-        xpManager = ExperienceManager.instance;
         xpManager.OnXPChanged += OnXPChanged;
     }
 
