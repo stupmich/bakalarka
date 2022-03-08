@@ -31,10 +31,12 @@ public class QuestLogUI : MonoBehaviour
     [SerializeField]
     private GameObject itemReward;
 
-    void Start()
+    void Awake()
     {
         Villager.OnQuestAssigned += OnQuestAssigned;
         Villager.OnQuestTurnedIn += OnQuestTurnedIn;
+
+        StateManager.OnQuestAssigned += OnQuestAssigned;
 
         noQuestsActive.SetActive(true);
     }

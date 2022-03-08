@@ -72,10 +72,12 @@ Did you find out whats going on?
 ->getIntoIt 
 
 === dragon ===
+{dragonVar:
 Kill that beast and bring me his head.
     + [I will take care of that, but it wont be cheap.]
     ~ questVariable = "Dragon"
     -> thanks_dragon()
+}
 
 === rewardGraveyard ===
 Here is yourd reward.

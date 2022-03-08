@@ -28,7 +28,6 @@ public class KillGoal : Goal
         if (pEnemyID == enemyID)
         {
             this.currentAmount++;
-            Debug.Log(this.currentAmount);
             CheckCompletion();
         }
     }

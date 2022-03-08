@@ -12,6 +12,7 @@ public class Quest : MonoBehaviour
     public int experienceReward;
     public Equipment itemReward;
     public bool completed;
+    public bool turnedIn;
 
     public void CheckGoalsCompletion()
     {

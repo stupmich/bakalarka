@@ -14,14 +14,30 @@ public class StateManager : MonoBehaviour
     [SerializeField]
     private GameObject player;
 
+    [SerializeField]
+    private GameObject assignedQuests;
+    [SerializeField]
+    private List<string> allQuests;
+    [SerializeField]
+    private List<Villager> questGivers;
+    [SerializeField]
+    private Villager questGiver;
+
+    public static event System.Action<Quest> OnQuestAssigned;
+
     void Awake()
     {
         EnemyStats.ChangedState += EnemyDied;
+        Villager.OnQuestTurnedIn += OnTurnedInSaveQuestState;
+
         this.LoadEnemiesState();
         this.LoadPlayerState();
+        
+    }
 
-        Debug.Log("START");
-
+    private void Start()
+    {
+        this.LoadQuestsState();
     }
 
     private void OnApplicationQuit()
@@ -29,6 +45,7 @@ public class StateManager : MonoBehaviour
         this.SaveEnemiesState();
         this.SavePlayerState();
         this.SaveSceneState();
+        SaveQuestsState();
     }
 
     public void SaveEnemiesState()
@@ -51,17 +68,14 @@ public class StateManager : MonoBehaviour
 
     public void LoadEnemiesState()
     {
-        Debug.Log("load");
         enemies = GameObject.FindGameObjectsWithTag("Enemy");
         var reader = QuickSaveReader.Create("Enemies");
 
-        Debug.Log("ENEMIES  " + enemies);
         foreach (GameObject enemy in enemies)
         {
             if (reader.Exists(enemy.name))
             {
                 reader.Read<bool>(enemy.name, (r) => { enemy.GetComponent<EnemyStats>().died = r; });
-                Debug.Log("Load" + enemy + enemy.GetComponent<EnemyStats>().died);
             }
         }
     }
@@ -105,7 +119,6 @@ public class StateManager : MonoBehaviour
 
         if (player != null && reader.Exists("positionX") && reader.Exists("positionY") && reader.Exists("positionZ"))
         {
-            //if exists
             reader.Read<float>("positionX", (x) => { position.x = x; });
             reader.Read<float>("positionY", (y) => { position.y = y; });
             reader.Read<float>("positionZ", (z) => { position.z = z; });
@@ -114,7 +127,6 @@ public class StateManager : MonoBehaviour
 
             if (rigidBody != null )
             {
-                Debug.Log(rigidBody);
                 rigidBody.gameObject.SetActive(false);
             }
             player.transform.position = position;
@@ -160,7 +172,6 @@ public class StateManager : MonoBehaviour
         if (reader.Exists("sceneName"))
         {
             reader.Read<string>("sceneName", (r) => { sceneName = r; });
-
         }
         return sceneName;
     }
@@ -175,5 +186,89 @@ public class StateManager : MonoBehaviour
         return "Main";
     }
 
+    public void SaveQuestsState()
+    {
+        Quest[] quests = this.assignedQuests.GetComponents<Quest>();
+        var writer = QuickSaveWriter.Create("Quests");
+        
+        foreach (Quest quest in quests)
+        {
+            writer.Write(quest.questName, quest.questName);
+            writer.Write(quest.questName + "Completed", quest.completed);
+            foreach (Goal goal in quest.goals)
+            {
+                writer.Write(quest.questName + goal.description, goal.currentAmount);
+            }
+            writer.Commit();
+        }
+    }
 
+    public void LoadQuestsState()
+    {
+        var reader = QuickSaveReader.Create("Quests");
+        string questName = "";
+        bool completed = false;
+        bool turnedIn = false;
+        Quest assignedQuest;
+
+        foreach (string name in this.allQuests)
+        {
+            if (reader.Exists(name))
+            {
+                if (reader.Exists(name + "turnedIn"))
+                {
+                    reader.Read<bool>(name + "turnedIn", (r) => { turnedIn = r; });
+                } else
+                {
+                    turnedIn = false;
+                }
+                
+                if (!turnedIn)
+                {
+                    Debug.Log(turnedIn + name);
+                    reader.Read<string>(name, (r) => { questName = r; });
+                    reader.Read<bool>(name + "Completed", (r) => { completed = r; });
+
+                    assignedQuest = (Quest)assignedQuests.AddComponent(System.Type.GetType(questName));
+                    assignedQuest.completed = completed;
+
+                    foreach (Goal goal in assignedQuest.goals)
+                    {
+                        reader.Read<int>(name + goal.description, (r) => { goal.currentAmount = r; });
+                    }
+
+                    if (OnQuestAssigned != null)
+                        OnQuestAssigned(assignedQuest);
+                }
+                questGiver.InitDialogueOnLoad(name);
+            }
+        }
+    }
+
+    public void OnTurnedInSaveQuestState(Quest quest)
+    {
+        var writer = QuickSaveWriter.Create("Quests");
+
+        writer.Write(quest.questName + "turnedIn", quest.turnedIn);
+        writer.Write(quest.questName, quest.questName);
+
+        writer.Delete(quest.questName + "Completed");
+        foreach (Goal goal in quest.goals)
+        {
+            writer.Delete(quest.questName + goal.description);
+        }
+        writer.Commit();
+    }
+
+    public void ResetQuestsState()
+    {
+        var writer = QuickSaveWriter.Create("Quests");
+
+        foreach (string key in writer.GetAllKeys())
+        {
+            Debug.Log(key);
+            writer.Delete(key);
+        }
+        writer.Commit();
+    }
 }

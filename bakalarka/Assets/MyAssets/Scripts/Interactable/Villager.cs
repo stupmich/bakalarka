@@ -16,7 +16,7 @@ public class Villager : Interactable
     public static event System.Action<Quest> OnQuestAssigned;
     public static event System.Action<Quest> OnQuestTurnedIn;
 
-    public void Start()
+    public void Awake()
     {
         DialogueManager.OnQuestChoice += TalkAboutQuest;
     }
@@ -26,6 +26,9 @@ public class Villager : Interactable
         base.interact();
 
         Quest[] assignedQuests = playerQuests.GetComponents<Quest>();
+
+        DialogueManager.GetInstance().SetCurrentStory(inkJSON);
+        
         foreach (string type in questTypes)
         {
             for (int i = 0; i < assignedQuests.Length; i++)
@@ -36,8 +39,7 @@ public class Villager : Interactable
                 }
             }
         }
-
-        DialogueManager.GetInstance().EnterDialogueMode(inkJSON);
+        DialogueManager.GetInstance().EnterDialogueMode();
     }
 
     public void TalkAboutQuest(string pQuestType)
@@ -50,6 +52,7 @@ public class Villager : Interactable
             {
                 if (CheckQuestCompletion(assignedQuests[i]))
                 {
+                    assignedQuests[i].turnedIn = true;
                     if (OnQuestTurnedIn != null)
                         OnQuestTurnedIn(assignedQuests[i]);
                     Object.Destroy(assignedQuests[i]);
@@ -67,7 +70,6 @@ public class Villager : Interactable
                 return;
             }
         }
- 
     }
 
     void AssignQuest(string pQuestType)
@@ -100,6 +102,14 @@ public class Villager : Interactable
         {
             return false;
         }
+    }
+
+    public void InitDialogueOnLoad(string variable)
+    {
+        Debug.Log(DialogueManager.GetInstance());
+        DialogueManager.GetInstance().SetCurrentStory(this.inkJSON);
+        DialogueManager.GetInstance().SetDialogueBoolVariable(variable.ToLower() + "Var", false);
+        Debug.Log(variable.ToLower() + "Var");
     }
 
 }

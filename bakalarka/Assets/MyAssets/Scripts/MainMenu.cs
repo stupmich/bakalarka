@@ -45,13 +45,13 @@ public class MainMenu : MonoBehaviour
         StartCoroutine(StartNewGame(stateManager.ResetSceneState()));
         stateManager.ResetEnemiesState();
         stateManager.ResetPlayerState();
+        stateManager.ResetQuestsState();
     }
 
     public void ClickOnContinue()
     {
         FadeOutMainMenu();
         StartCoroutine(StartNewGame(stateManager.LoadSceneState()));
-        
         //if (stateManager.LoadSceneState() == "Main")
         //{
         //    Instantiate(playerPrefab, mainPosition.transform.position, Quaternion.identity);

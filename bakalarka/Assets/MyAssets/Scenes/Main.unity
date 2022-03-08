@@ -1104,6 +1104,46 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: quests
+      value: 
+      objectReference: {fileID: 738079127}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: questGiver
+      value: 
+      objectReference: {fileID: 1740622041}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: assignedQuests
+      value: 
+      objectReference: {fileID: 738079127}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: allQuests.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: questGivers.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: allQuests.Array.data[0]
+      value: Supplies
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: allQuests.Array.data[1]
+      value: Necromancer
+      objectReference: {fileID: 0}
+    - target: {fileID: 8742659787640539038, guid: 9ef7d68345e93124b9ad05737454d2a0,
+        type: 3}
+      propertyPath: allQuests.Array.data[2]
+      value: Dragon
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 9ef7d68345e93124b9ad05737454d2a0, type: 3}
 --- !u!114 &25127417 stripped
@@ -5014,6 +5054,12 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &169360708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3667681501701525633, guid: 5fe1e5ba17df255458c7951bbb360828,
+    type: 3}
+  m_PrefabInstance: {fileID: 3667681501590502471}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &171176465
 GameObject:
   m_ObjectHideFlags: 0
@@ -86701,9 +86747,9 @@ MonoBehaviour:
     m_NumAlphaKeys: 2
   colorGradientTexture: {fileID: 0}
   shallowColor: {r: 0, g: 0.5566037, b: 0.44923854, a: 0.5019608}
-  deepColor: {r: 0, g: 0.25966153, b: 0.6509434, a: 1}
+  deepColor: {r: 0, g: 0.25965145, b: 0.6509434, a: 1}
   colorDepth: 1.63
-  horizonColor: {r: 0, g: 0.22702917, b: 0.8, a: 1}
+  horizonColor: {r: 0, g: 0.22701913, b: 0.8, a: 1}
   horizonDistance: 20
   shoreFade: 1
   shoreColor: {r: 1, g: 1, b: 1, a: 0}
@@ -86711,7 +86757,7 @@ MonoBehaviour:
   shoreBlend: 1
   shoreDepth: 0
   waveColor: {r: 0, g: 0, b: 0, a: 0}
-  underwaterColor: {r: 0.20352176, g: 0.30938208, b: 0.517647, a: 0}
+  underwaterColor: {r: 0.20351222, g: 0.309372, b: 0.517647, a: 0}
   underwaterColorStrength: 0
   underwaterRefractionStrength: 0.15
   surfaceFoamTexture: {fileID: 2800000, guid: d3b0d77dfe711a04c8ff18ecc260aa66, type: 3}
@@ -87606,6 +87652,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3667681500866579935, guid: 5fe1e5ba17df255458c7951bbb360828,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 53.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 3667681500866579935, guid: 5fe1e5ba17df255458c7951bbb360828,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -84.21
+      objectReference: {fileID: 0}
     - target: {fileID: 3667681501014852130, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
       propertyPath: m_SizeDelta.x
@@ -87629,7 +87685,7 @@ PrefabInstance:
     - target: {fileID: 3667681501360972901, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.8
+      value: -132.1
       objectReference: {fileID: 0}
     - target: {fileID: 3667681501360972901, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
@@ -87639,7 +87695,7 @@ PrefabInstance:
     - target: {fileID: 3667681501360972901, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 276.6
+      value: 335.1
       objectReference: {fileID: 0}
     - target: {fileID: 3667681501360972901, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
@@ -87676,6 +87732,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3667681501360972902, guid: 5fe1e5ba17df255458c7951bbb360828,
+        type: 3}
+      propertyPath: m_Speed
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 3667681501465079331, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -87686,6 +87747,11 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 1143699047}
+    - target: {fileID: 3667681502043147165, guid: 5fe1e5ba17df255458c7951bbb360828,
+        type: 3}
+      propertyPath: statsUI
+      value: 
+      objectReference: {fileID: 169360708}
     - target: {fileID: 3667681502644666984, guid: 5fe1e5ba17df255458c7951bbb360828,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target

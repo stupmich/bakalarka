@@ -9,6 +9,7 @@ public class Dragon : Quest
         this.questName = "Dragon";
         this.description = "Kill the beast and bring me his head.";
         this.experienceReward = 500;
+        this.turnedIn = false;
 
         goals.Add(new CollectionGoal(this, "Dragon Head", "Bring me head of that dragon.", false, 0, 1));
 

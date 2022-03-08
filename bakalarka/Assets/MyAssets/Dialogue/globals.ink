@@ -3,4 +3,5 @@ VAR Necromancer = false
 VAR Dragon = false
 VAR suppliesVar = true
 VAR necromancerVar = true
+VAR dragonVar = true
 VAR questVariable  = ""

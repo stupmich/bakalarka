@@ -22,14 +22,14 @@ public class Entrance : Interactable
     {
         base.interact();
         stateManager.SaveEnemiesState();
+        stateManager.SavePlayerState();
         StartCoroutine(Enter());
-        
+        stateManager.LoadEnemiesState();
     }
 
 
     IEnumerator Enter()
     {
-        
         // Set the current Scene to be able to unload it later
         Scene currentScene = SceneManager.GetActiveScene();
 
@@ -44,6 +44,5 @@ public class Entrance : Interactable
 
         // Unload the previous Scene
         SceneManager.UnloadSceneAsync(currentScene);
-        stateManager.LoadEnemiesState();
     }
 }

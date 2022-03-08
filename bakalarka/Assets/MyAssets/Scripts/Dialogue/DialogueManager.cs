@@ -22,7 +22,7 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-
+        Debug.Log("AWAKE");
         dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
     }
 
@@ -73,9 +73,14 @@ public class DialogueManager : MonoBehaviour
         }
     }
 
-    public void EnterDialogueMode(TextAsset inkJSON)
+    public void SetCurrentStory(TextAsset inkJSON)
     {
         currentStory = new Story(inkJSON.text);
+    }
+
+    public void EnterDialogueMode()
+    {
+        
         dialogueIsPlaying = true;
         dialoguePanel.SetActive(true);
 
