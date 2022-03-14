@@ -30,7 +30,6 @@ public class PlayerStats : CharacterStats
     public int rage;
     public int maxRage = 100;
 
-    public Stat level;
     public Stat vitality;
     public Stat strength;
     public Stat dexterity;

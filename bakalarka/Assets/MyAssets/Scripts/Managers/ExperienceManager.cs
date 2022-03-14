@@ -76,4 +76,9 @@ public class ExperienceManager : MonoBehaviour
             OnXPChanged(toLevelXP, currentXP, level, statPoints);
         }
     }
+
+    public void SetLevel(int pLevel)
+    {
+        this.level = pLevel;
+    }
 }

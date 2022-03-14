@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f321446ff31f40f4eb03ac468e68ba03, type: 3}
   m_Name: SprintAbility
   m_EditorClassIdentifier: 
-  name: SprintAbility
+  name: Sprint
   cooldownTime: 20
   activeTime: 10
   abilityImage: {fileID: 21300000, guid: 2be67e765ab292d4c9c5e4950106de84, type: 3}

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2a27064506a4bd74082e68a35b30a39e, type: 3}
   m_Name: BattleStanceAbility
   m_EditorClassIdentifier: 
-  name: 
+  name: Battle Stance
   cooldownTime: 20
   activeTime: 10
   abilityImage: {fileID: 21300000, guid: 964aa99f5fb4e684db09dcec4bc3e18a, type: 3}

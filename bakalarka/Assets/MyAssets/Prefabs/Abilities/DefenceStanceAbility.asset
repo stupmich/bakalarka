@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 93ba5e2b54aff0240b6be6751b503eca, type: 3}
   m_Name: DefenceStanceAbility
   m_EditorClassIdentifier: 
-  name: 
+  name: Defence Stance
   cooldownTime: 20
   activeTime: 10
   abilityImage: {fileID: 21300000, guid: ced35058c15c3da43b50b78bff9d4ded, type: 3}

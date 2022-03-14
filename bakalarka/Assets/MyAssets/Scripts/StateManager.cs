@@ -13,6 +13,14 @@ public class StateManager : MonoBehaviour
 
     [SerializeField]
     private GameObject player;
+    [SerializeField]
+    private PlayerStats playerStats;
+    [SerializeField]
+    private ExperienceManager experienceManager;
+
+    private PlayerAbilities playerAbilities;
+    [SerializeField]
+    private List<PlayerAbility> allAbilitiesPrefabs;
 
     [SerializeField]
     private GameObject assignedQuests;
@@ -20,10 +28,9 @@ public class StateManager : MonoBehaviour
     private List<string> allQuests;
     [SerializeField]
     private List<Villager> questGivers;
-    [SerializeField]
-    private Villager questGiver;
 
     public static event System.Action<Quest> OnQuestAssigned;
+    public event System.Action<PlayerAbility> OnAbilitiesLoaded;
 
     void Awake()
     {
@@ -31,21 +38,34 @@ public class StateManager : MonoBehaviour
         Villager.OnQuestTurnedIn += OnTurnedInSaveQuestState;
 
         this.LoadEnemiesState();
-        this.LoadPlayerState();
-        
+
+        if (this.player != null)
+        {
+            this.LoadPlayerState();
+        }
     }
 
     private void Start()
     {
-        this.LoadQuestsState();
+        if (this.player != null)
+        {
+            this.LoadQuestsState();
+            this.LoadInventoryState();
+            this.LoadPlayerAbilities();
+        }
     }
 
     private void OnApplicationQuit()
     {
-        this.SaveEnemiesState();
-        this.SavePlayerState();
-        this.SaveSceneState();
-        SaveQuestsState();
+        if (this.player != null)
+        {
+            this.SaveEnemiesState();
+            this.SavePlayerState();
+            this.SaveSceneState();
+            this.SaveQuestsState();
+            this.SaveInventoryState();
+            this.SavePlayerAbilities();
+        }
     }
 
     public void SaveEnemiesState()
@@ -94,12 +114,15 @@ public class StateManager : MonoBehaviour
 
     private void EnemyDied(GameObject enemy)
     {
-        deadEnemies.Add(enemy); 
+        deadEnemies.Add(enemy);
     }
 
     public void SavePlayerState()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+        playerStats = PlayerStats.instance;
+        
+
         var writer = QuickSaveWriter.Create("Player");
 
         if (player != null)
@@ -107,6 +130,20 @@ public class StateManager : MonoBehaviour
             writer.Write("positionX", player.gameObject.transform.position.x);
             writer.Write("positionY", player.gameObject.transform.position.y);
             writer.Write("positionZ", player.gameObject.transform.position.z);
+
+            writer.Write("vitality", playerStats.vitality.GetBaseValue());
+            writer.Write("strength", playerStats.strength.GetBaseValue());
+            writer.Write("dexterity", playerStats.dexterity.GetBaseValue());
+            writer.Write("blockChance", playerStats.blockChance.GetBaseValue());
+            writer.Write("critChance", playerStats.critChance.GetBaseValue());
+            writer.Write("attackSpeed", playerStats.attackSpeed.GetBaseValue());
+
+            writer.Write("currentXP", experienceManager.currentXP);
+            writer.Write("toLevelXP", experienceManager.toLevelXP);
+            writer.Write("level", experienceManager.level);
+            writer.Write("statPoints", experienceManager.statPoints);
+            writer.Write("abilityPoints", experienceManager.abilityPoints);
+
             writer.Commit();
         }
     }
@@ -114,8 +151,10 @@ public class StateManager : MonoBehaviour
     public void LoadPlayerState()
     {
         player = GameObject.FindGameObjectWithTag("Player");
-        var reader = QuickSaveReader.Create("Player");
+        
         Vector3 position = new Vector3(0.0f, 0.0f, 0.0f);
+
+        var reader = QuickSaveReader.Create("Player");
 
         if (player != null && reader.Exists("positionX") && reader.Exists("positionY") && reader.Exists("positionZ"))
         {
@@ -125,7 +164,7 @@ public class StateManager : MonoBehaviour
 
             Rigidbody rigidBody = player.GetComponent<Rigidbody>();
 
-            if (rigidBody != null )
+            if (rigidBody != null)
             {
                 rigidBody.gameObject.SetActive(false);
             }
@@ -134,6 +173,19 @@ public class StateManager : MonoBehaviour
             {
                 rigidBody.gameObject.SetActive(true);
             }
+            
+            reader.Read<int>("vitality", (z) => { playerStats.vitality.SetBaseValue(z); });
+            reader.Read<int>("strength", (z) => { playerStats.strength.SetBaseValue(z); });
+            reader.Read<int>("dexterity", (z) => { playerStats.dexterity.SetBaseValue(z); });
+            reader.Read<int>("blockChance", (z) => { playerStats.blockChance.SetBaseValue(z); });
+            reader.Read<int>("critChance", (z) => { playerStats.critChance.SetBaseValue(z); });
+            reader.Read<int>("attackSpeed", (z) => { playerStats.attackSpeed.SetBaseValue(z); });
+
+            reader.Read<int>("currentXP", (z) => { experienceManager.currentXP = z; });
+            reader.Read<int>("toLevelXP", (z) => { experienceManager.toLevelXP = z; });
+            reader.Read<int>("level", (z) => { experienceManager.SetLevel(z); });
+            reader.Read<int>("statPoints", (z) => { experienceManager.statPoints = z; });
+            reader.Read<int>("abilityPoints", (z) => { experienceManager.abilityPoints = z; });
         }
     }
 
@@ -147,8 +199,6 @@ public class StateManager : MonoBehaviour
             writer.Delete(key);
         }
         writer.Commit();
-
-        Debug.Log("reset");
     }
 
 
@@ -190,7 +240,7 @@ public class StateManager : MonoBehaviour
     {
         Quest[] quests = this.assignedQuests.GetComponents<Quest>();
         var writer = QuickSaveWriter.Create("Quests");
-        
+
         foreach (Quest quest in quests)
         {
             writer.Write(quest.questName, quest.questName);
@@ -218,14 +268,14 @@ public class StateManager : MonoBehaviour
                 if (reader.Exists(name + "turnedIn"))
                 {
                     reader.Read<bool>(name + "turnedIn", (r) => { turnedIn = r; });
-                } else
+                }
+                else
                 {
                     turnedIn = false;
                 }
-                
+
                 if (!turnedIn)
                 {
-                    Debug.Log(turnedIn + name);
                     reader.Read<string>(name, (r) => { questName = r; });
                     reader.Read<bool>(name + "Completed", (r) => { completed = r; });
 
@@ -240,7 +290,14 @@ public class StateManager : MonoBehaviour
                     if (OnQuestAssigned != null)
                         OnQuestAssigned(assignedQuest);
                 }
-                questGiver.InitDialogueOnLoad(name);
+
+                foreach (Villager questGiver in questGivers)
+                {
+                    if (questGiver.GetAvaibleQuests().Contains(name))
+                    {
+                        questGiver.InitDialogueOnLoad(name);
+                    }
+                }
             }
         }
     }
@@ -266,9 +323,150 @@ public class StateManager : MonoBehaviour
 
         foreach (string key in writer.GetAllKeys())
         {
-            Debug.Log(key);
             writer.Delete(key);
         }
         writer.Commit();
     }
+
+    public void SaveInventoryState()
+    {
+        if (Inventory.instance != null)
+        {
+            List<Item> itemsInBag = Inventory.instance.items;
+            List<Equipment> equipedItems = Inventory.instance.equipedItems;
+            var writer = QuickSaveWriter.Create("ItemsBag");
+
+            foreach (string key in writer.GetAllKeys())
+            {
+                writer.Delete(key);
+                writer.Commit();
+            }
+
+            foreach (Item item in itemsInBag)
+            {
+                writer.Write(item.name, item.name.Replace(" ", ""));
+                writer.Commit();
+            }
+
+            writer = QuickSaveWriter.Create("ItemsEquiped");
+
+            foreach (string key in writer.GetAllKeys())
+            {
+                writer.Delete(key);
+                writer.Commit();
+            }
+
+            foreach (Equipment equip in equipedItems)
+            {
+                writer.Write(equip.name, equip.name.Replace(" ", ""));
+                writer.Commit();
+            }
+            
+        }
+    }
+
+    public void LoadInventoryState()
+    {
+        if (Inventory.instance != null)
+        {
+            var readerItems = QuickSaveReader.Create("ItemsBag");
+            Item item = null;
+            Equipment equip = null;
+
+            string itemName = "";
+            string path = "";
+
+            foreach (string key in readerItems.GetAllKeys())
+            {
+                readerItems.Read<string>(key, (r) => { itemName = r; });
+                path = "Items/" + itemName;
+                item = (Item)Resources.Load(path);
+
+                Inventory.instance.Add(item);
+            }
+
+            var readerEquip = QuickSaveReader.Create("ItemsEquiped");
+
+            foreach (string key in readerEquip.GetAllKeys())
+            {
+                readerEquip.Read<string>(key, (r) => { itemName = r; });
+                path = "Items/" + itemName;
+                equip = (Equipment)Resources.Load(path);
+                if (!equip.isDefaultItem)
+                {
+                    EquipmentManager.instance.Equip(equip);
+                }
+            }
+        }
+    }
+
+    public void ResetInventoryState()
+    {
+        var writerItems = QuickSaveWriter.Create("ItemsBag");
+
+        foreach (string key in writerItems.GetAllKeys())
+        {
+            writerItems.Delete(key);
+        }
+        writerItems.Commit();
+
+        var writerEquip = QuickSaveWriter.Create("ItemsEquiped");
+        foreach (string key in writerEquip.GetAllKeys())
+        {
+            writerEquip.Delete(key);
+        }
+        writerEquip.Commit();
+    }
+
+    public void SavePlayerAbilities()
+    {
+        var writer = QuickSaveWriter.Create("Abilities");
+        this.playerAbilities = PlayerAbilities.instance;
+        
+        foreach (PlayerAbility playerAbility in playerAbilities.abilities)
+        {
+            writer.Write(playerAbility.ability.name + " name", playerAbility.ability.name);
+            writer.Write(playerAbility.ability.name + " level", playerAbility.level);
+            writer.Write(playerAbility.ability.name + " key", playerAbility.key.ToString());
+        }
+        writer.Commit();
+    }
+
+    public void LoadPlayerAbilities()
+    {
+        var reader = QuickSaveReader.Create("Abilities");
+        PlayerAbility pa = ScriptableObject.CreateInstance<PlayerAbility>();
+        this.playerStats = PlayerStats.instance;
+
+
+        foreach (PlayerAbility playerAbilityPrefab in this.allAbilitiesPrefabs)
+        {
+            if (reader.Exists(playerAbilityPrefab.ability.name + " name"))
+            {
+                pa = playerAbilityPrefab;
+                reader.Read<int>(playerAbilityPrefab.ability.name + " level", (r) => { pa.level = r; });
+                reader.Read<KeyCode>(playerAbilityPrefab.ability.name + " key", (r) => { pa.key = r; });
+                pa.SetStats(this.playerStats);
+
+                PlayerAbilities.instance.abilities.Add(pa);
+
+                if (OnAbilitiesLoaded != null)
+                {
+                    OnAbilitiesLoaded(pa);
+                }
+            }
+        }
+    }
+
+    public void ResetPlayerAbilities()
+    {
+        var writer = QuickSaveWriter.Create("Abilities");
+
+        foreach (string key in writer.GetAllKeys())
+        {
+            writer.Delete(key);
+        }
+        writer.Commit();
+    }
+
 }

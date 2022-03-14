@@ -34,6 +34,10 @@ public class Inventory : MonoBehaviour
 
     void Start()
     {
+        if (onItemChangedCallBack != null)
+        {
+            onItemChangedCallBack.Invoke();
+        }
         DontDestroyOnLoad(gameObject);
     }
 

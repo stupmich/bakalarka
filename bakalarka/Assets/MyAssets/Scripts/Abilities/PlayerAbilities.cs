@@ -4,6 +4,13 @@ using UnityEngine;
 
 public class PlayerAbilities : MonoBehaviour
 {
+    [SerializeField]
+    private ExperienceManager xpManager;
+    public List<PlayerAbility> abilities;
+    public Ability drinkPotionAbility;
+
+    public event System.Action<Ability> OnAbilityLearned;
+
     #region Singleton
     public static PlayerAbilities instance;
 
@@ -17,22 +24,22 @@ public class PlayerAbilities : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
+        abilities = new List<PlayerAbility>();
     }
     #endregion
-
-    public List<PlayerAbility> abilities;
-    ExperienceManager xpManager;
-    public Ability drinkPotionAbility;
-
-    public event System.Action<Ability> OnAbilityLearned;
 
     // Start is called before the first frame update
     void Start()
     {
-        abilities = new List<PlayerAbility>();
-        xpManager = ExperienceManager.instance;
-
         LearnAbility(drinkPotionAbility);
+
+        foreach (PlayerAbility ab in abilities)
+        {
+            if (OnAbilityLearned != null)
+            {
+                OnAbilityLearned(ab.ability);
+            }
+        }
     }
 
     // Update is called once per frame

@@ -32,9 +32,6 @@ public class AbilitiesUI : MonoBehaviour
         if (Input.GetButtonDown("Abilities"))
         {
             abilitiesUI.SetActive(!abilitiesUI.activeSelf);
-
         }
     }
-
-
 }

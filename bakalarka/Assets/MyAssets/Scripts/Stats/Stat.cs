@@ -36,4 +36,14 @@ public class Stat
     {
         baseValue++;
     }
+
+    public int GetBaseValue()
+    {
+        return this.baseValue;
+    }
+
+    public void SetBaseValue(int pBaseValue)
+    {
+        this.baseValue = pBaseValue;
+    }
 }

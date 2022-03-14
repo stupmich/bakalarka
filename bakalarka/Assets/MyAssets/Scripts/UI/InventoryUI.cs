@@ -9,13 +9,18 @@ public class InventoryUI : MonoBehaviour
     void Awake()
     {
         instace = this;
+
         xpManager.OnXPChanged += OnXPChanged;
+        playerStats.OnStatChanged += UpdateStats;
+        inventory.onItemChangedCallBack += UpdateUI;
     }
     #endregion
 
     [SerializeField]
     ExperienceManager xpManager;
+    [SerializeField]
     Inventory inventory;
+    [SerializeField]
     PlayerStats playerStats;
 
     public Transform itemsParent;
@@ -35,23 +40,16 @@ public class InventoryUI : MonoBehaviour
 
     void Start()
     {
-        playerStats = PlayerStats.instance;
-        playerStats.OnStatChanged += UpdateStats;
-
-        inventory = Inventory.instance;
-        inventory.onItemChangedCallBack += UpdateUI;
-
         slots = itemsParent.GetComponentsInChildren<InventorySlot>();
         equipSlots = itemsParent.GetComponentsInChildren<EquipSlot>();
 
-        levelText.text = playerStats.level.GetValue().ToString();
+        levelText.text = xpManager.level.ToString();
         strengthText.text = playerStats.strength.GetValue().ToString();
         dexterityText.text = playerStats.dexterity.GetValue().ToString();
         vitalityText.text = playerStats.vitality.GetValue().ToString();
         armorText.text = playerStats.armor.GetValue().ToString();
         damageText.text = playerStats.damage.GetValue().ToString();
         goldText.text = playerStats.gold.GetValue().ToString();
-
     }
 
     // Update is called once per frame
@@ -95,7 +93,6 @@ public class InventoryUI : MonoBehaviour
                 if (equipSlots[i].equipmentSlot == inventory.equipedItems[j].equipmentSlot)
                 {
                     equipSlots[i].AddItem(inventory.equipedItems[j]);
-                    Debug.Log(inventory.equipedItems[j]);
                 }
             }
         }

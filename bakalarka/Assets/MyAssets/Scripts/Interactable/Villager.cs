@@ -10,7 +10,7 @@ public class Villager : Interactable
     [SerializeField]
     private GameObject playerQuests;
     [SerializeField]
-    private List<string> questTypes;
+    private List<string> avaibleQuests;
     private Quest quest { get; set; }
 
     public static event System.Action<Quest> OnQuestAssigned;
@@ -29,7 +29,7 @@ public class Villager : Interactable
 
         DialogueManager.GetInstance().SetCurrentStory(inkJSON);
         
-        foreach (string type in questTypes)
+        foreach (string type in avaibleQuests)
         {
             for (int i = 0; i < assignedQuests.Length; i++)
             {
@@ -62,7 +62,7 @@ public class Villager : Interactable
             }
         }
 
-        foreach (string type in questTypes)
+        foreach (string type in avaibleQuests)
         {
             if (type == pQuestType)
             {
@@ -96,7 +96,7 @@ public class Villager : Interactable
                 }
             }
             pQuest.GiveReward();
-            questTypes.Remove(pQuest.questName);
+            avaibleQuests.Remove(pQuest.questName);
             return true;
         } else
         {
@@ -106,10 +106,12 @@ public class Villager : Interactable
 
     public void InitDialogueOnLoad(string variable)
     {
-        Debug.Log(DialogueManager.GetInstance());
         DialogueManager.GetInstance().SetCurrentStory(this.inkJSON);
         DialogueManager.GetInstance().SetDialogueBoolVariable(variable.ToLower() + "Var", false);
-        Debug.Log(variable.ToLower() + "Var");
     }
 
+    public List<string> GetAvaibleQuests()
+    {
+        return this.avaibleQuests;
+    }
 }

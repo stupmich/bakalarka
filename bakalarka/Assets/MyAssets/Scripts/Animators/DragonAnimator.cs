@@ -45,7 +45,6 @@ public class DragonAnimator : CharacterAnimator
                 overrideController[replaceableAttackAnimation.name] = currentAttackAnimationSet[0];
                 combat.attackSpeed = 0.6f;
             }
-            Debug.Log(attackCounter);
             attackCounter++;
         }
     }

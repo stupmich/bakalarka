@@ -10,17 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ce6915f3695dc1442b347aebcd29c7bb, type: 3}
-  m_Name: SteelHelmetEquipment
+  m_Name: SteelChestArmor
   m_EditorClassIdentifier: 
-  name: Steel Helmet
-  icon: {fileID: 21300000, guid: 2d14c038cb067844895a6627742ccd8d, type: 3}
+  name: Steel Chest Armor
+  icon: {fileID: 21300000, guid: d2e7360d2d018444e969f7641af9d40c, type: 3}
   isDefaultItem: 0
-  equipmentSlot: 0
-  mesh: {fileID: 5534765435562281124, guid: 194264fa18fac764c85a06591c1e85cd, type: 3}
-  coveredMeshRegions: 
-  armorModifier: 5
+  equipmentSlot: 1
+  mesh: {fileID: 3602657039539497127, guid: b527b33c9072c4a41b018b7316434964, type: 3}
+  coveredMeshRegions: 0100000002000000
+  armorModifier: 10
   vitalityModifier: 0
   strengthModifier: 0
   dexterityModifier: 0
   blockChanceModifier: 0
-  damageModifier: 1
+  damageModifier: 2

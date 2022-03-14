@@ -10,6 +10,7 @@ public class PlayerAbility : ScriptableObject
     float activeTime;
     public int level;
     private int maxLevel;
+    [SerializeField]
     private PlayerStats stats;
 
     enum AbilityState
@@ -101,5 +102,10 @@ public class PlayerAbility : ScriptableObject
     public float GetAbilityActiveTime()
     {
         return ability.activeTime;
+    }
+
+    public void SetStats(PlayerStats pPlayerStats)
+    {
+        this.stats = pPlayerStats;
     }
 }

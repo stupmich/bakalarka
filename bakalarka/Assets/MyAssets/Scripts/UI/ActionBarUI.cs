@@ -9,6 +9,8 @@ public class ActionBarUI : MonoBehaviour
     private PlayerAbilities abilities;
     [SerializeField]
     private PlayerStats stats;
+    [SerializeField]
+    private StateManager stateManager;
 
     public Image ability1;
     public Image ability2;
@@ -24,13 +26,17 @@ public class ActionBarUI : MonoBehaviour
 
     public Image health;
     public Image rage;
+
     private void Awake()
     {
         stats.OnRageChanged += UpdateRageUI;
         stats.OnHealthChanged += UpdateHealthUI;
 
         abilities.OnAbilityLearned += OnAbilityLearned;
+
+        stateManager.OnAbilitiesLoaded += OnAbilitiesLoaded;
     }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,39 +68,52 @@ public class ActionBarUI : MonoBehaviour
         }
     }
 
+    public void OnAbilitiesLoaded(PlayerAbility pPlayerAbility)
+    {
+        switch (pPlayerAbility.key)
+        {
+            case KeyCode.Q:
+                ability1.sprite = pPlayerAbility.ability.abilityImage;
+                break;
+            case KeyCode.W:
+                ability2.sprite = pPlayerAbility.ability.abilityImage;
+                break;
+            case KeyCode.E:
+                ability3.sprite = pPlayerAbility.ability.abilityImage;
+                break;
+            case KeyCode.R:
+                ability4.sprite = pPlayerAbility.ability.abilityImage;
+                break;
+            default:
+                break;
+        }
+    }
+
     void Update()
     {
-        int counter = 1;
         foreach (PlayerAbility ab in abilities.abilities)
         {
             float cooldownPerct = ab.GetCurrentCooldownTime() / (float)ab.GetAbilityCooldownTime();
-            switch (counter)
+            switch (ab.key)
             {
-                case 1:
-                    cooldown5.fillAmount = cooldownPerct;
-                    break;
-
-                case 2:
+                case KeyCode.Q:
                     cooldown1.fillAmount = cooldownPerct;
                     break;
-
-                case 3:
+                case KeyCode.W:
                     cooldown2.fillAmount = cooldownPerct;
                     break;
-
-                case 4:
+                case KeyCode.E:
                     cooldown3.fillAmount = cooldownPerct;
                     break;
-
-                case 5:
+                case KeyCode.R:
                     cooldown4.fillAmount = cooldownPerct;
                     break;
-
+                case KeyCode.V:
+                    cooldown5.fillAmount = cooldownPerct;
+                    break;
                 default:
                     break;
             }
-            counter++;
-
         }
     }
 

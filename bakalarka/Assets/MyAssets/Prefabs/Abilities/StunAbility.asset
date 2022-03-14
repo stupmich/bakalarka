@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e9318d98ad1f3e34f92d2db07d5b0e9c, type: 3}
   m_Name: StunAbility
   m_EditorClassIdentifier: 
-  name: 
+  name: Ground Slash
   cooldownTime: 15
   activeTime: 3
   abilityImage: {fileID: 21300000, guid: f13b0852619ad5d4a89c90752c457368, type: 3}

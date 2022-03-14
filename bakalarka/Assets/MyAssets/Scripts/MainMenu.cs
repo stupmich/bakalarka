@@ -46,6 +46,8 @@ public class MainMenu : MonoBehaviour
         stateManager.ResetEnemiesState();
         stateManager.ResetPlayerState();
         stateManager.ResetQuestsState();
+        stateManager.ResetInventoryState();
+        stateManager.ResetPlayerAbilities();
     }
 
     public void ClickOnContinue()

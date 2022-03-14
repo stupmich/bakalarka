@@ -32,7 +32,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
 
     public void OnRemoveButton()
     {
-        Inventory.instance.RemoveEquipFromSlot(item);
+        //Inventory.instance.RemoveEquipFromSlot(item);
         EquipmentManager.instance.UnequipByItem(item);
         removeButton.gameObject.SetActive(false);
         icon.sprite = defaultIcon;
@@ -112,7 +112,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Block chance: " + item.blockChanceModifier.ToString();
             }
-
+            InventoryUI.instace.itemInfo = this.equipInfo;
         }
 
     }
