@@ -319,7 +319,7 @@ MonoBehaviour:
   removeButton: {fileID: 2298201537603342898}
   equipInfoPrefab: {fileID: 1718222080690847709, guid: db5c8311237529a499a95d069b8a9dbd,
     type: 3}
-  equipInfo: {fileID: 0}
+  itemInfo: {fileID: 0}
   textPrefab: {fileID: 5477241838715682023, guid: 6bae26c8b0c1d954d8235253dafab2da,
     type: 3}
 --- !u!1 &2298201538245730030

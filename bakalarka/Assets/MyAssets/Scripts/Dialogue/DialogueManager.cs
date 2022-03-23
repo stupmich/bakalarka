@@ -22,7 +22,6 @@ public class DialogueManager : MonoBehaviour
         {
             Destroy(this.gameObject);
         }
-        Debug.Log("AWAKE");
         dialogueVariables = new DialogueVariables(globalsInkFile.filePath);
     }
 

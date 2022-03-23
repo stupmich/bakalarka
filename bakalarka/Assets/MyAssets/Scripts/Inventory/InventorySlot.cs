@@ -14,7 +14,6 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
     public Text textPrefab;
     private Text[] texts;
 
-
     public void AddItem(Item newItem)
     {
         item = newItem;
@@ -64,7 +63,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(itemInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(itemInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Damage: " + equip.damageModifier.ToString();
             }
@@ -73,7 +72,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(itemInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(itemInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Armor: " + equip.armorModifier.ToString();
             }
@@ -82,7 +81,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(itemInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(itemInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Vitality: " + equip.vitalityModifier.ToString();
             }
@@ -100,7 +99,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(itemInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(itemInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Dexterity: " + equip.dexterityModifier.ToString();
             }
@@ -109,7 +108,7 @@ public class InventorySlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHa
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(itemInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(itemInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Block chance: " + equip.blockChanceModifier.ToString();
             }

@@ -63,7 +63,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(equipInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Damage: " + item.damageModifier.ToString();
             }
@@ -72,7 +72,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(equipInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Armor: " + item.armorModifier.ToString();
             }
@@ -81,7 +81,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(equipInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Vitality: " + item.vitalityModifier.ToString();
             }
@@ -90,7 +90,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(equipInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Strength: " + item.strengthModifier.ToString();
             }
@@ -99,7 +99,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(equipInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Dexterity: " + item.dexterityModifier.ToString();
             }
@@ -108,7 +108,7 @@ public class EquipSlot : MonoBehaviour, IPointerEnterHandler, IPointerExitHandle
             {
                 Text tempTextBox = Instantiate(textPrefab, new Vector3(0, 0, 0), transform.rotation) as Text;
                 //Parent to the panel
-                tempTextBox.transform.SetParent(equipInfo.transform.GetChild(2), false);
+                tempTextBox.transform.SetParent(equipInfo.transform, false);
                 //Set the text box's text element to the current textToDisplay:
                 tempTextBox.text = "Block chance: " + item.blockChanceModifier.ToString();
             }

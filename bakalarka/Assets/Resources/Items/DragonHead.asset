@@ -9,9 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 55139ee654d9deb409acd09c1afa4f85, type: 3}
+  m_Script: {fileID: 11500000, guid: cafed60494fe30348983f842d53c2910, type: 3}
   m_Name: DragonHead
   m_EditorClassIdentifier: 
-  name: DragonHead
-  icon: {fileID: 0}
+  name: Dragon Head
+  icon: {fileID: 21300000, guid: 5540d425fcb600e4fbce9450ccfe85b7, type: 3}
   isDefaultItem: 0
+  quest: {fileID: 0}

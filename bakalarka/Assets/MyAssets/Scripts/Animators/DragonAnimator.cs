@@ -17,9 +17,9 @@ public class DragonAnimator : CharacterAnimator
 
             if (!animator.GetBool("InCombat") && combat.InCombat)
             {
+                animator.SetBool("InCombat", combat.InCombat);
                 animator.SetTrigger("Scream");
             }
-            animator.SetBool("InCombat", combat.InCombat);
         }
     }
 

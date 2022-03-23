@@ -3,7 +3,14 @@ guid: b751cbd94032c7648b671677af724402
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - icon: {instanceID: 0}
+  - removeButton: {instanceID: 0}
+  - equipInfoPrefab: {fileID: 8167477745972427662, guid: eea1ca2951a88ec44868a389dd4f0ec8,
+      type: 3}
+  - itemInfo: {instanceID: 0}
+  - textPrefab: {fileID: 6308356463364266824, guid: 6bae26c8b0c1d954d8235253dafab2da,
+      type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

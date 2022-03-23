@@ -37,13 +37,13 @@ public class CharacterCombat : MonoBehaviour
 
         if (attackCoolDown <= 0f)
         {
+            InCombat = true;
             StartCoroutine(DoDamage(targetStats, attackDelay));
 
             if (OnAttack != null)
                 OnAttack();
 
             attackCoolDown = 1f / attackSpeed;
-            InCombat = true;
             lastAttackTime = Time.time;
         }
     }
