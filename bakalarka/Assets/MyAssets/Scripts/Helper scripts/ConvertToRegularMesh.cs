@@ -5,7 +5,7 @@ using UnityEngine;
 [ExecuteInEditMode]
 public class ConvertToRegularMesh : MonoBehaviour
 {
-
+  //dgs
     void Start()
     {
         if (GetComponent<SkinnedMeshRenderer>())
